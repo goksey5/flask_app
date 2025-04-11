@@ -125,13 +125,14 @@
 <body>
     <div class="container">
         <header>
-            <h1>WELCOME TO python DEVELOPMENT QUIZ</h1>
+            <h1>>Welcome to the Python Development Quiz</h1>
         </header>
 
         <div class="content">
-            <a href="{{ url_for('quiz') }}" class="btn">
-                <button>SKOR TABLOSUNU GÖRÜNTÜLE</button>
+            <a href="{{ url_for('result') }}" class="btn">
+                <button type="button">SONUÇLARI GÖR</button>
             </a>
+            
 
             <form action="{{ url_for('quiz') }}" method="POST"> 
                 <input type="text" name="username" placeholder="Kullanıcı Adınız" required>

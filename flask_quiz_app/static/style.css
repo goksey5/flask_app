@@ -10,12 +10,7 @@ body {
     line-height: 1.6;
     background-color: #f0f2f5;
     color: #333;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    padding-top: 50px;
 }
 
 /* Header Stili */
@@ -25,8 +20,10 @@ header {
     padding: 1rem;
     margin-bottom: 2rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
+/* Skor Gösterim Alanı */
 .score-display {
     position: absolute;
     top: 20px;
@@ -78,6 +75,11 @@ header {
     background-color: #e9ecef;
 }
 
+.options label:focus {
+    outline: none;
+    background-color: #dcdcdc;
+}
+
 /* Buton Stilleri */
 .btn-primary, .btn-secondary {
     display: inline-block;
@@ -106,6 +108,11 @@ header {
 
 .btn-secondary:hover {
     background-color: #7f8c8d;
+}
+
+.btn-primary:focus, .btn-secondary:focus {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+    outline: none;
 }
 
 /* Sonuç Sayfası Stilleri */
@@ -205,5 +212,35 @@ footer {
     .btn-primary, .btn-secondary {
         display: block;
         margin: 10px 0;
+    }
+    
+    footer p {
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+    
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: transparent;
+        font-size: 14px;
+    }
+    
+    .score-value {
+        opacity: 0;
+        animation: fadeInUp 1s forwards;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }

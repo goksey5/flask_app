@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,141 +9,112 @@
             font-family: 'Segoe UI', sans-serif;
             background-color: #f0f2f5;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            padding-bottom: 100px;
-        }
-
-        .score-board {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            padding: 30px 20px 80px; /* alt boşluk footer için */
             background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 1000;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 40px;
         }
 
-        .score-item {
-            margin: 5px 0;
-            font-size: 14px;
+        h1 {
+            text-align: center;
             color: #2c3e50;
         }
 
-        .score-value {
-            font-weight: bold;
-            color: #3498db;
+        form {
+            margin-top: 30px;
         }
 
         .question {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
 
-        .question-text {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
         }
 
         label {
             display: block;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        label:hover {
-            background-color: #e9ecef;
+            margin-bottom: 8px;
+            padding-left: 10px;
         }
 
         input[type="radio"] {
             margin-right: 10px;
         }
 
-        .submit-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 30px;
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
             background-color: #3498db;
             color: white;
+            font-size: 16px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
         }
 
-        .submit-button:hover {
+        .submit-btn:hover {
             background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .score-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="score-board">
-            <div class="score-item">
-                Tüm Zamanların En Yüksek Puanı: <span class="score-value">{{ all_time_best }}</span>
-            </div>
-            <div class="score-item">
-                Sizin En Yüksek Puanınız: <span class="score-value">{{ user_best }}</span>
-            </div>
-        </div>
 
-        <form method="POST">
-            {% for question in questions %}
-            <div class="question">
-                <div class="question-text">
-                    <span class="question-number">{{ loop.index }}.</span>
-                    <span>{{ question.question_text.split('.', 1)[-1].strip() }}</span>
-                </div>
-                <div class="options">
-                    <label>
-                        <input type="radio" name="answer_{{ question.id }}" value="a" required>
-                        A) {{ question.option_a }}
-                    </label>
-                    <label>
-                        <input type="radio" name="answer_{{ question.id }}" value="b" required>
-                        B) {{ question.option_b }}
-                    </label>
-                    <label>
-                        <input type="radio" name="answer_{{ question.id }}" value="c" required>
-                        C) {{ question.option_c }}
-                    </label>
-                    <label>
-                        <input type="radio" name="answer_{{ question.id }}" value="d" required>
-                        D) {{ question.option_d }}
-                    </label>
-                </div>
-            </div>
-            {% endfor %}
-            <button type="submit" class="submit-button">Tamamla</button>
-        </form>
-        <footer>
-            <p>DEVELOPED BY GÖKHAN ŞEN</p>
-        </footer>
+    <div class="score-box">
+        Şu Anki Skorunuz: {{ score }}
     </div>
+
+    <div class="container">
+        <h1>Quiz'e Hoş Geldiniz</h1>
+        <form method="POST" action="{{ url_for('submit_quiz') }}">
+            {% for question in questions %}
+                <div class="question">
+                    <p>{{ loop.index }}. {{ question.question_text }}</p>
+                    <label><input type="radio" name="question_{{ question.id }}" value="A" required> A) {{ question.option_a }}</label>
+                    <label><input type="radio" name="question_{{ question.id }}" value="B"> B) {{ question.option_b }}</label>
+                    <label><input type="radio" name="question_{{ question.id }}" value="C"> C) {{ question.option_c }}</label>
+                    <label><input type="radio" name="question_{{ question.id }}" value="D"> D) {{ question.option_d }}</label>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-btn">Gönder</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>DEVELOPED BY GÖKHAN ŞEN</p>
+    </footer>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,6 +87,32 @@
             transform: translateY(-2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
+
+        /* Footer sabitleme */
+        footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Responsive için küçük ekranlarda uygun düzen */
+        @media (max-width: 600px) {
+            .result-container {
+                padding: 20px;
+            }
+
+            .score-value {
+                font-size: 20px;
+            }
+
+            .button {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -109,14 +135,26 @@
             <div class="score-value">{{ all_time_best }}</div>
         </div>
 
-      
         <div class="buttons">
             <a href="{{ url_for('start_quiz') }}" class="button retry">Tekrar Dene</a>
             <a href="{{ url_for('index') }}" class="button home">Ana Sayfa</a>
         </div>
-        <footer>
-            <p>DEVELOPED BY GÖKHAN ŞEN</p>
-        </footer>
     </div>
+   
+    <div class="result-container">
+        <h2>Sonuçlar</h2>
+        <p>Son puanınız: {{ last_score }}</p>
+        <p>En yüksek puanınız: {{ user_best }}</p>
+        <p>Tüm zamanların en yüksek puanı: {{ all_time_best }}</p>
+
+        <!-- Skor tablosunu görmek için bağlantı -->
+        <div class="score-link">
+            <a href="{{ url_for('show_scores') }}" class="btn-primary">Skor Tablosunu Görüntüle</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>DEVELOPED BY GÖKHAN ŞEN</p>
+    </footer>
 </body>
 </html>

@@ -1,5 +1,5 @@
-from app import db
 from datetime import datetime
+from app import db  # db'yi burada doğru şekilde import ediyoruz
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

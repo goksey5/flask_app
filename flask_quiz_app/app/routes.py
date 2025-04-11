@@ -77,3 +77,12 @@ def result():
         user_best=user_best,
         all_time_best=all_time_best
     )
+@app.route('/show_scores')
+def show_scores():
+    # Tüm kullanıcıların skorlarını al
+    scores = Score.query.join(User).add_columns(User.username, Score.score).all()
+    
+    # Skorları sıralayın (örneğin, yüksekten düşüğe doğru)
+    scores = sorted(scores, key=lambda x: x.score, reverse=True)
+    
+    return render_template('scores.html', scores=scores)

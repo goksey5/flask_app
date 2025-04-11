@@ -1,25 +1,25 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
 
-# Flask uygulamasını oluştur
+# Flask uygulaması ve veritabanı nesnelerini oluştur
 app = Flask(__name__)
 
-# Veritabanı yolunu belirle
+# Veritabanı yolunu belirt
 basedir = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(basedir, '../instance/quiz.db')
+db_path = os.path.join(basedir, 'instance', 'quiz.db')  # Veritabanı dosyasının yolu
 
 # Yapılandırma
 app.config['SECRET_KEY'] = 'your-secret-key'
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Veritabanını başlat
+# Veritabanı nesnesi
 db = SQLAlchemy(app)
 
-# Route'ları import et
+# Uygulama rotalarını ve modelleri içe aktar
 from app import routes, models
 
 # Veritabanını oluştur
 with app.app_context():
-    db.create_all()
+    db.create_all()  # Veritabanı tablolarını oluştur
+
