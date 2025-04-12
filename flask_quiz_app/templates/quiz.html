@@ -67,18 +67,6 @@
             background-color: #2980b9;
         }
 
-        .score-box {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #ecf0f1;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
         footer {
             position: fixed;
             bottom: 10px;
@@ -91,13 +79,9 @@
 </head>
 <body>
 
-    <!-- <div class="score-box">
-        Şu Anki Skorunuz: {{ score }}
-    </div> -->
-
     <div class="container">
         <h1>Quiz'e Hoş Geldiniz</h1>
-        <form method="POST" action="{{ url_for('submit_quiz') }}">
+        <form method="POST" action="{{ url_for('submit_answers') }}">
             {% for question in questions %}
                 <div class="question">
                     <p>{{ loop.index }}. {{ question.question_text }}</p>
@@ -107,13 +91,12 @@
                     <label><input type="radio" name="answer_{{ question.id }}" value="D"> D) {{ question.option_d }}</label>
                 </div>
             {% endfor %}
-
-            <button type="submit" class="submit-btn">Gönder</button>
+            <button type="submit" class="submit-btn">Cevapları Gönder</button>
         </form>
     </div>
 
-    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f0f2f5; padding: 10px 0; text-align: center; border-top: 1px solid #ccc;">
-        <p style="margin: 0; font-size: 14px; color: #555;">Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
+    <footer>
+        <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </footer>
     
 </body>
