@@ -196,7 +196,7 @@ footer {
 /* Responsive Tasarım */
 @media (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 30px 20px 100px;
     }
 
     .score-display {

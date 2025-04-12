@@ -15,7 +15,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 30px 20px 80px; /* alt boşluk footer için */
+            padding: 30px 20px 80px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -91,9 +91,9 @@
 </head>
 <body>
 
-    <div class="score-box">
+    <!-- <div class="score-box">
         Şu Anki Skorunuz: {{ score }}
-    </div>
+    </div> -->
 
     <div class="container">
         <h1>Quiz'e Hoş Geldiniz</h1>
@@ -101,10 +101,10 @@
             {% for question in questions %}
                 <div class="question">
                     <p>{{ loop.index }}. {{ question.question_text }}</p>
-                    <label><input type="radio" name="question_{{ question.id }}" value="A" required> A) {{ question.option_a }}</label>
-                    <label><input type="radio" name="question_{{ question.id }}" value="B"> B) {{ question.option_b }}</label>
-                    <label><input type="radio" name="question_{{ question.id }}" value="C"> C) {{ question.option_c }}</label>
-                    <label><input type="radio" name="question_{{ question.id }}" value="D"> D) {{ question.option_d }}</label>
+                    <label><input type="radio" name="answer_{{ question.id }}" value="A" required> A) {{ question.option_a }}</label>
+                    <label><input type="radio" name="answer_{{ question.id }}" value="B"> B) {{ question.option_b }}</label>
+                    <label><input type="radio" name="answer_{{ question.id }}" value="C"> C) {{ question.option_c }}</label>
+                    <label><input type="radio" name="answer_{{ question.id }}" value="D"> D) {{ question.option_d }}</label>
                 </div>
             {% endfor %}
 
@@ -112,9 +112,9 @@
         </form>
     </div>
 
-    <footer>
-        <p>DEVELOPED BY GÖKHAN ŞEN</p>
+    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f0f2f5; padding: 10px 0; text-align: center; border-top: 1px solid #ccc;">
+        <p style="margin: 0; font-size: 14px; color: #555;">Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </footer>
-
+    
 </body>
 </html>

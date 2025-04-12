@@ -116,6 +116,7 @@
     </style>
 </head>
 <body>
+    
     <div class="result-container">
         <h1>Quiz Sonucu</h1>
         <div class="username">{{ username }}</div>
@@ -139,22 +140,16 @@
             <a href="{{ url_for('start_quiz') }}" class="button retry">Tekrar Dene</a>
             <a href="{{ url_for('index') }}" class="button home">Ana Sayfa</a>
         </div>
-    </div>
-   
-    <div class="result-container">
-        <h2>Sonuçlar</h2>
-        <p>Son puanınız: {{ last_score }}</p>
-        <p>En yüksek puanınız: {{ user_best }}</p>
-        <p>Tüm zamanların en yüksek puanı: {{ all_time_best }}</p>
 
-        <!-- Skor tablosunu görmek için bağlantı -->
-        <div class="score-link">
-            <a href="{{ url_for('show_scores') }}" class="btn-primary">Skor Tablosunu Görüntüle</a>
+        <!-- Tüm Sonuçları Göster Butonu -->
+        <div class="buttons" style="margin-top: 30px;">
+            <a href="{{ url_for('show_scores') }}" class="button retry">Tüm Sonuçları Göster</a>
         </div>
     </div>
 
-    <footer>
-        <p>DEVELOPED BY GÖKHAN ŞEN</p>
+    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f0f2f5; padding: 10px 0; text-align: center; border-top: 1px solid #ccc;">
+        <p style="margin: 0; font-size: 14px; color: #555;">Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </footer>
+
 </body>
 </html>

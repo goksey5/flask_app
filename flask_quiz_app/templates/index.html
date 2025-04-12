@@ -19,6 +19,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            justify-content: center;
+            align-items: center;
         }
 
         header {
@@ -27,6 +29,7 @@
             text-align: center;
             padding: 2rem 0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
         header h1 {
@@ -36,13 +39,13 @@
         }
 
         .content {
-            flex: 1;
             max-width: 600px;
-            margin: 2rem auto;
+            margin: 2rem;
             padding: 2rem;
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
         .btn {
@@ -125,25 +128,23 @@
 <body>
     <div class="container">
         <header>
-            <h1>>Welcome to the Python Development Quiz</h1>
+            <h1> Web Geliştirme ve Programlama Sınavı</h1>
         </header>
 
         <div class="content">
-            <a href="{{ url_for('result') }}" class="btn">
-                <button type="button">SONUÇLARI GÖR</button>
-            </a>
-            
-
-            <form action="{{ url_for('quiz') }}" method="POST"> 
-                <input type="text" name="username" placeholder="Kullanıcı Adınız" required>
-                <button type="submit">START QUIZ</button>
+            <form action="{{ url_for('start_quiz') }}" method="POST">
+                <div class="form-group mb-3">
+                    <label for="username">Kullanıcı Adınız:</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Adınızı giriniz" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Teste Başla</button>
             </form>
         </div>
-
-        <footer>
-            <p>DEVELOPED BY GÖKHAN ŞEN</p>
-        </footer>
     </div>
+
+    <footer>
+        <p style="margin: 0; font-size: 14px; color: #555;">Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
+    </footer>
 </body>
 
 </html>

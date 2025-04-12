@@ -1,29 +1,28 @@
-# app.py
-import os
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 
-# Flask uygulaması oluşturuluyor
-app = Flask(__name__)
-
-# Veritabanı yolunu belirle
+# Güvenli veritabanı yolu ayarı
 basedir = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(basedir, 'instance', 'quiz.db')  # Veritabanı dosyası 'instance/quiz.db'
 
-# Yapılandırmalar
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+app = Flask(__name__)
+app.secret_key = 'secret_key'
+
+# SQLite veritabanı yolu
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'quiz.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = "supersecretkey"
 
-# Veritabanı ve migrasyon nesneleri oluşturuluyor
+# Veritabanı ve migrate işlemleri
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# Modeller içe aktarılıyor (db tanımlandıktan sonra!)
-from app.models import User, Question, Score
+# Modelleri içe aktar
+from models import User, Question, Score
 
-# Ana çalışma bloğu
-if __name__ == "__main__":
+# Route'ları dahil et (çok önemli!)
+import routes
+
+# Geliştirme ortamında sunucuyu başlat
+if __name__ == '__main__':
     app.run(debug=True)
-
