@@ -1,32 +1,39 @@
-<!-- scores.html -->
+<!-- templates/scores.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skor Tablosu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <h1>Skor Tablosu</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Kullanıcı Adı</th>
-                <th>Skor</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for score in scores %}
-            <tr>
-                <td>{{ score.username }}</td>
-                <td>{{ score.score }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Tüm Kullanıcı Skorları</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kullanıcı Adı</th>
+                    <th>Skor</th>
+                    <th>Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ score.username }}</td>
+                    <td>{{ score.score }}</td>
+                    <td>{{ score.timestamp.strftime('%d.%m.%Y %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('index') }}" class="button retry">Ana Sayfaya Dön</a>
+    </div>
 </body>
 
 </html>
+
 

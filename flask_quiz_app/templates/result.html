@@ -59,8 +59,9 @@
         .buttons {
             margin-top: 30px;
             display: flex;
+            flex-direction: column;
             gap: 10px;
-            justify-content: center;
+            align-items: center;
         }
 
         .button {
@@ -71,6 +72,8 @@
             font-size: 16px;
             transition: all 0.3s ease;
             text-decoration: none;
+            width: 100%;
+            max-width: 250px;
         }
 
         .retry {
@@ -88,28 +91,20 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* Footer sabitleme */
         footer {
             position: fixed;
-            bottom: 10px;
+            bottom: 0;
             width: 100%;
+            background-color: #f0f2f5;
+            padding: 10px 0;
             text-align: center;
+            border-top: 1px solid #ccc;
             font-size: 14px;
-            color: #777;
+            color: #555;
         }
 
-        /* Responsive için küçük ekranlarda uygun düzen */
         @media (max-width: 600px) {
-            .result-container {
-                padding: 20px;
-            }
-
-            .score-value {
-                font-size: 20px;
-            }
-
             .button {
-                width: 100%;
                 font-size: 14px;
             }
         }
@@ -139,10 +134,6 @@
         <div class="buttons">
             <a href="{{ url_for('start_quiz') }}" class="button retry">Tekrar Dene</a>
             <a href="{{ url_for('index') }}" class="button home">Ana Sayfa</a>
-        </div>
-
-        <!-- Tüm Sonuçları Göster Butonu -->
-        <div class="buttons" style="margin-top: 30px;">
             <a href="{{ url_for('show_scores') }}" class="button retry">Tüm Sonuçları Göster</a>
         </div>
     </div>
@@ -150,6 +141,7 @@
     <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f0f2f5; padding: 10px 0; text-align: center; border-top: 1px solid #ccc;">
         <p style="margin: 0; font-size: 14px; color: #555;">Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </footer>
+    
 
 </body>
 </html>

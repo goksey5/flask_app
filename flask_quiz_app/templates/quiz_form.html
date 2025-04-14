@@ -1,81 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Form</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .form-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #2c3e50;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #34495e;
-            margin-bottom: 1.5rem;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            box-sizing: border-box;
-        }
-
-        button {
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <title>Quiz Sonucu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-    <div class="form-container">
-        <h1>Welcome to the Quiz!</h1>
-        <p>Please enter your name to start the quiz:</p>
-        <form method="POST">
-            <input type="text" id="username" name="username" placeholder="Your name..." required>
-            <button type="submit">Start Quiz</button>
-        </form>
-    </div>
-</body>
+    <div class="result-container">
+        <h1>Quiz Sonucu</h1>
+        <div class="username">{{ username }}</div>
 
+        <div class="score-item">
+            <div class="score-label">Son Aldığınız Puan</div>
+            <div class="score-value">{{ last_score }}</div>
+        </div>
+
+        <div class="score-item">
+            <div class="score-label">Sizin En Yüksek Puanınız</div>
+            <div class="score-value">{{ user_best }}</div>
+        </div>
+
+        <div class="score-item">
+            <div class="score-label">Tüm Zamanların En Yüksek Puanı</div>
+            <div class="score-value">{{ all_time_best }}</div>
+        </div>
+
+        <div class="buttons">
+            <a href="{{ url_for('start_quiz') }}" class="button retry">Tekrar Dene</a>
+            <a href="{{ url_for('index') }}" class="button home">Ana Sayfa</a>
+            <a href="{{ url_for('show_scores') }}" class="button retry">Tüm Sonuçları Göster</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
+    </footer>
+</body>
 </html>

@@ -23,162 +23,80 @@ header {
     text-align: center;
 }
 
-/* Skor Gösterim Alanı */
-.score-display {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: rgba(255,255,255,0.1);
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Ana Sayfa Stilleri */
-.welcome-section {
-    text-align: center;
-    padding: 3rem;
+/* Sonuç Sayfası Stilleri */
+.result-container {
     background-color: white;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-/* Sınav Sayfası Stilleri */
-.exam-container {
-    max-width: 800px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
-    padding: 20px;
 }
 
-.question-box {
-    background-color: white;
-    padding: 20px;
-    margin-bottom: 20px;
+h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.score-item {
+    margin: 15px 0;
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.options {
-    margin-top: 15px;
-}
-
-.options label {
-    display: block;
-    padding: 10px;
-    margin: 5px 0;
     background-color: #f8f9fa;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.options label:hover {
-    background-color: #e9ecef;
+.score-label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
 }
 
-.options label:focus {
-    outline: none;
-    background-color: #dcdcdc;
+.score-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3498db;
 }
 
-/* Buton Stilleri */
-.btn-primary, .btn-secondary {
-    display: inline-block;
-    padding: 12px 24px;
+.username {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.button {
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
+    font-size: 16px;
     transition: all 0.3s ease;
+    text-decoration: none;
+    width: 100%;
+    max-width: 250px;
 }
 
-.btn-primary {
+.retry {
     background-color: #3498db;
     color: white;
 }
 
-.btn-secondary {
-    background-color: #95a5a6;
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #2980b9;
-}
-
-.btn-secondary:hover {
-    background-color: #7f8c8d;
-}
-
-.btn-primary:focus, .btn-secondary:focus {
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
-    outline: none;
-}
-
-/* Sonuç Sayfası Stilleri */
-.results-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.score-card {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-    margin: 20px 0;
-}
-
-.score {
-    font-size: 48px;
-    color: #2c3e50;
-    margin: 20px 0;
-}
-
-.score-details {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-}
-
-/* Puan Tablosu Stilleri */
-.scores-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.scores-table th,
-.scores-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.scores-table th {
+.home {
     background-color: #2c3e50;
     color: white;
 }
 
-.scores-table tr:hover {
-    background-color: #f5f5f5;
-}
-
-/* Timer Stili */
-.timer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #2c3e50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
+.button:hover {
+    transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
@@ -199,48 +117,27 @@ footer {
         padding: 30px 20px 100px;
     }
 
-    .score-display {
-        position: static;
-        margin-top: 10px;
-    }
-
-    .timer {
-        position: static;
-        margin-bottom: 20px;
-    }
-
     .btn-primary, .btn-secondary {
         display: block;
         margin: 10px 0;
     }
-    
+
     footer p {
         font-style: italic;
         font-size: 0.9rem;
     }
-    
-    footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        background-color: transparent;
-        font-size: 14px;
+
+    .button.retry {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: 0.3s;
     }
-    
-    .score-value {
-        opacity: 0;
-        animation: fadeInUp 1s forwards;
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
+    .button.retry:hover {
+        background-color: #2980b9;
     }
 }
