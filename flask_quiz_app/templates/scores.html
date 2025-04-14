@@ -1,39 +1,48 @@
 <!-- templates/scores.html -->
 <!DOCTYPE html>
 <html lang="tr">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <head>
     <meta charset="UTF-8">
-    <title>Skor Tablosu</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Tüm Skorlar - Flask Quiz App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-
 <body>
-    <div class="container">
-        <h1>Tüm Kullanıcı Skorları</h1>
-        <table>
-            <thead>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Tüm Katılımcıların Skorları</h2>
+
+    {% if scores %}
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
                 <tr>
-                    <th>Kullanıcı Adı</th>
-                    <th>Skor</th>
-                    <th>Tarih</th>
+                    <th scope="col">Kullanıcı Adı</th>
+                    <th scope="col">Skor</th>
+                    <th scope="col">Tarih</th>
                 </tr>
             </thead>
             <tbody>
                 {% for score in scores %}
-                <tr>
-                    <td>{{ score.username }}</td>
-                    <td>{{ score.score }}</td>
-                    <td>{{ score.timestamp.strftime('%d.%m.%Y %H:%M') }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ score.user.username }}</td>
+                        <td>{{ score.score }}</td>
+                        <td>{{ score.timestamp.strftime('%d.%m.%Y %H:%M') }}</td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{{ url_for('index') }}" class="button retry">Ana Sayfaya Dön</a>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            Henüz hiçbir skor kaydedilmedi.
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary">Ana Sayfaya Dön</a>
     </div>
+</div>
+
+<footer class="footer text-center mt-5 mb-3 text-muted">
+    <small>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</small>
+</footer>
+
 </body>
-
 </html>
-
-

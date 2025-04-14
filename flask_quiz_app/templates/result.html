@@ -1,147 +1,51 @@
+<!-- templates/result.html -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Sonucu</title>
+    <title>Sonuç - Flask Quiz App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .result-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-        }
-
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
-
-        .score-item {
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-        }
-
-        .score-label {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        .score-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .username {
-            color: #2c3e50;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .buttons {
-            margin-top: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            align-items: center;
+            min-height: 100vh;
         }
-
-        .button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            width: 100%;
-            max-width: 250px;
-        }
-
-        .retry {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .home {
-            background-color: #2c3e50;
-            color: white;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
         footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #f0f2f5;
-            padding: 10px 0;
+            margin-top: auto;
+            background-color: #f8f9fa;
             text-align: center;
-            border-top: 1px solid #ccc;
-            font-size: 14px;
-            color: #555;
-        }
-
-        @media (max-width: 600px) {
-            .button {
-                font-size: 14px;
-            }
+            padding: 15px 0;
         }
     </style>
 </head>
 <body>
-    
-    <div class="result-container">
-        <h1>Quiz Sonucu</h1>
-        <div class="username">{{ username }}</div>
 
-        <div class="score-item">
-            <div class="score-label">Son Aldığınız Puan</div>
-            <div class="score-value">{{ last_score }}</div>
+<div class="container mt-5">
+    <div class="card text-center">
+        <div class="card-header">
+            Quiz Sonucu
         </div>
-
-        <div class="score-item">
-            <div class="score-label">Sizin En Yüksek Puanınız</div>
-            <div class="score-value">{{ user_best }}</div>
+        <div class="card-body">
+            <h5 class="card-title">{{ username }}, testin tamamlandı!</h5>
+            <p class="card-text"><strong>Son Puanınız:</strong> {{ last_score }}</p>
+            <p class="card-text"><strong>En İyi Puanınız:</strong> {{ user_best }}</p>
+            <p class="card-text"><strong>Tüm Zamanların En İyi Skoru:</strong> {{ all_time_best }}</p>
+            
+            <a href="{{ url_for('results') }}" class="btn btn-primary mt-3">Tüm Sonuçları Gör</a>
+            <a href="{{ url_for('main.index') }}" class="btn btn-secondary mt-3">Tekrar Dene</a>
         </div>
-
-        <div class="score-item">
-            <div class="score-label">Tüm Zamanların En Yüksek Puanı</div>
-            <div class="score-value">{{ all_time_best }}</div>
-        </div>
-
-        <div class="buttons">
-            <a href="{{ url_for('start_quiz') }}" class="button retry">Tekrar Dene</a>
-            <a href="{{ url_for('index') }}" class="button home">Ana Sayfa</a>
-            <a href="{{ url_for('show_scores') }}" class="button retry">Tüm Sonuçları Göster</a>
+        <div class="card-footer text-muted">
+            Başarılar!
         </div>
     </div>
+</div>
 
-    <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #f0f2f5; padding: 10px 0; text-align: center; border-top: 1px solid #ccc;">
-        <p style="margin: 0; font-size: 14px; color: #555;">Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
-    </footer>
-    
+<footer>
+    Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025
+</footer>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,15 +1,17 @@
-from flask import render_template, request, redirect, url_for, session
-from app import app, db
+from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask_quiz_app.extensions import db
 from flask_quiz_app.models import User, Question, Score
 from sqlalchemy import func
 
+main = Blueprint('main', __name__)
+
 # Ana Sayfa: Kullanıcıdan isim al
-@app.route('/')
+@main.route('/')
 def index():
     return render_template('index.html')
 
 # Quiz Başlat (kullanıcı adı alındıktan sonra çalışır)
-@app.route("/quiz", methods=["GET", "POST"])
+@main.route("/quiz", methods=["GET", "POST"])
 def quiz():
     if request.method == "POST":
         score = 0
@@ -38,18 +40,29 @@ def quiz():
         return render_template("quiz.html", questions=questions)
 
 # Quiz Sayfası (soruları gösterir ve quiz gönderimini alır)
-@app.route('/start_quiz', methods=['GET', 'POST'])
+@main.route('/start_quiz', methods=['GET', 'POST'])
 def start_quiz():
+    if request.method == 'POST':
+        # İlk POST isteğinde gelen username'i session'a kaydet
+        username = request.form.get('username')
+        if username:
+            session['username'] = username
+
     if 'username' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
 
     user = User.query.filter_by(username=session['username']).first()
-    questions = Question.query.all()
+    if not user:
+        user = User(username=session['username'])
+        db.session.add(user)
+        db.session.commit()
 
+    questions = Question.query.all()
     all_time_best = db.session.query(func.max(Score.score)).scalar() or 0
     user_best = db.session.query(func.max(Score.score)).filter(Score.user_id == user.id).scalar() or 0
 
-    if request.method == 'POST':
+    if request.method == 'POST' and not request.form.get('username'):
+        # Quiz cevapları burada işlenir
         score = 0
         for question in questions:
             answer = request.form.get(f'answer_{question.id}')
@@ -61,18 +74,19 @@ def start_quiz():
         db.session.commit()
 
         session['last_score'] = score
-        return redirect(url_for('result'))
+        return redirect(url_for('main.result'))
 
     return render_template('quiz.html',
                            questions=questions,
                            all_time_best=all_time_best,
                            user_best=user_best)
 
+
 # Sonuç Sayfası
-@app.route('/result')
+@main.route('/result')
 def result():
     if 'username' not in session:
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
 
     user = User.query.filter_by(username=session['username']).first()
     all_time_best = db.session.query(func.max(Score.score)).scalar() or 0
@@ -87,8 +101,12 @@ def result():
         all_time_best=all_time_best
     )
 
+@main.route('/retry', methods=['POST'])
+def retry_quiz():
+    return redirect(url_for('quiz'))
+
 # Tüm Skorları Göster
-@app.route('/show_scores')
+@main.route('/show_scores')
 def show_scores():
     scores = Score.query.join(User).add_columns(User.username, Score.score).all()
     scores = sorted(scores, key=lambda x: x.score, reverse=True)

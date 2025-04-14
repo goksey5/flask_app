@@ -124,7 +124,8 @@
 
     <div class="container">
         <div class="content">
-            <form action="{{ url_for('start_quiz') }}" method="POST">
+            <form action="{{ url_for('main.start_quiz') }}" method="POST">
+
                 <label for="username">Kullanıcı Adınız:</label>
                 <input type="text" id="username" name="username" placeholder="Adınızı giriniz" required>
                 <button type="submit">Teste Başla</button>

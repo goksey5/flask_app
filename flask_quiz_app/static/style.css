@@ -140,4 +140,30 @@ footer {
     .button.retry:hover {
         background-color: #2980b9;
     }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Değişiklik: Yatayda ortalarken, dikeyde sayfanın üst kısmını daha rahat yerleştiririz */
+        height: 100vh;
+        margin: 0;
+        overflow: auto; /* Bu, kaydırmanın önüne geçer */
+    }
+    .container {
+        width: 80%;
+        max-width: 800px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 50px;
+        overflow-y: auto; /* Bu, içerik çok uzun olsa bile kaymasını sağlar */
+        height: 80vh; /* Bu, içeriği daha uyumlu hale getirir */
+    }
+    
 }
