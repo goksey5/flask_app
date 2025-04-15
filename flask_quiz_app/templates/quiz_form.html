@@ -1,142 +1,144 @@
 <!DOCTYPE html>
 <html lang="tr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUIZ APP</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css" />
     <style>
-        body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7fa;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+      body {
+        font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f7fa;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
 
-        header {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      header {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 2rem 0;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .content {
+        background-color: white;
+        padding: 3rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      label {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+
+      input[type="text"] {
+        padding: 1rem;
+        font-size: 1.1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+
+      button {
+        padding: 1rem;
+        font-size: 1.2rem;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+        transform: scale(1.03);
+      }
+
+      footer {
+        text-align: center;
+        background-color: #2c3e50;
+        color: white;
+        padding: 1rem 0;
+      }
+
+      footer p {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          padding: 2rem 1.5rem;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+          font-size: 2rem;
         }
-
-        .container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .content {
-            background-color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        label {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        input[type="text"] {
-            padding: 1rem;
-            font-size: 1.1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        button {
-            padding: 1rem;
-            font-size: 1.2rem;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-            transform: scale(1.03);
-        }
-
-        footer {
-            text-align: center;
-            background-color: #2c3e50;
-            color: white;
-            padding: 1rem 0;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 2rem 1.5rem;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>Web Geliştirme ve Programlama Sınavı</h1>
+      <h1>Web Geliştirme ve Programlama Sınavı</h1>
     </header>
 
     <div class="container">
-        <div class="content">
-            <form action="{{ url_for('main.start_quiz') }}" method="POST">
-
-                <label for="username">Kullanıcı Adınız:</label>
-                <input type="text" id="username" name="username" placeholder="Adınızı giriniz" required>
-                <button type="submit">Teste Başla</button>
-            </form>
-        </div>
+      <div class="content">
+        <form action="{{ url_for('main.start_quiz') }}" method="POST">
+          <label for="username">Kullanıcı Adınız:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Adınızı giriniz"
+            required
+          />
+          <button type="submit">Teste Başla</button>
+        </form>
+      </div>
     </div>
 
     <footer>
-        <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
+      <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </footer>
-</body>
-
+  </body>
 </html>
-

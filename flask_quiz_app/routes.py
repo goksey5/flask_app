@@ -103,7 +103,7 @@ def result():
 
 @main.route('/retry', methods=['POST'])
 def retry_quiz():
-    return redirect(url_for('quiz'))
+    return redirect(url_for('main.start_quiz'))
 
 # Tüm Skorları Göster
 @main.route('/show_scores')

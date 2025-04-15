@@ -1,17 +1,23 @@
+# flask_quiz_app/app.py
+
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_quiz_app.config import Config
+from flask_quiz_app.extensions import db, migrate
+from flask_quiz_app.routes import main  # Blueprint
 
-# Uygulama ve veritabanı bağlantılarını oluşturma
-app = Flask(__name__)
-app.config.from_object(Config)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-# SQLAlchemy ve Migrate'ı uygulamaya bağlama
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+    # Extensions
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-from flask_quiz_app import routes  # routes.py içeriği
+    # Blueprints
+    app.register_blueprint(main)
+
+    return app
+
 
 
 
