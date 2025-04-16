@@ -1,11 +1,11 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_quiz_app import app, db
+from flask import render_template, request, redirect, url_for, session
+from flask_quiz_app.models import Score, Question
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+# Geliştirici hakkında bilgi
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
-from flask_quiz_app import routes
+if __name__ == "__main__":
+    app.run(debug=True)
