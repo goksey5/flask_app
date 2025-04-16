@@ -1,0 +1,34 @@
+# __pycache__ klasörlerini dışla
+__pycache__/
+*.py[cod]
+
+# Veritabanı dosyası (SQLite)
+*.db
+*.sqlite3
+
+# Ortam dosyaları
+.env
+*.env
+
+# Flask-Migrate dizini (migration geçmişi, ister dahil et ister dışla)
+migrations/
+*.log
+
+# VSCode ayarları
+.vscode/
+
+# sanal ortam (örneğin venv, env, .venv)
+venv/
+env/
+.venv/
+
+# IDE dosyaları
+.idea/
+*.swp
+.DS_Store
+
+# Test çıktıları
+htmlcov/
+coverage.xml
+.cache/
+pytest_cache/
