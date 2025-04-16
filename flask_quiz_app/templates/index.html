@@ -123,7 +123,9 @@
 
     <div class="container">
       <div class="content">
-        <form action="{{ url_for('main.start_quiz') }}" method="POST">
+         <a href="{{ url_for('result') }}" class="btn">
+          <button>Tüm Skor Tablosunu Gör</button>
+          </a>
           <label for="username">Kullanıcı Adınız:</label>
           <input
             type="text"

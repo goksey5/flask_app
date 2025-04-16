@@ -1,139 +1,117 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Quiz</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
 
-      .container {
-        width: 80%;
-        max-width: 800px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-      h1 {
-        text-align: center;
-        margin-bottom: 30px;
-      }
+    .container {
+      width: 80%;
+      max-width: 800px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-      .card {
-        background-color: #fafafa;
-        margin: 10px 0;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-      .card h5 {
-        margin-bottom: 10px;
-      }
+    .card {
+      background-color: #fafafa;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-      .form-check {
-        margin-bottom: 10px;
-      }
+    .card h5 {
+      margin-bottom: 10px;
+    }
 
-      .form-check input {
-        margin-right: 10px;
-      }
+    .form-check {
+      margin-bottom: 10px;
+    }
 
-      .btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+    .form-check input {
+      margin-right: 10px;
+    }
 
-      .btn:hover {
-        background-color: #0056b3;
-      }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-      .footer {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 14px;
-        color: #555;
-      }
-    </style>
-  </head>
+    .btn:hover {
+      background-color: #0056b3;
+    }
 
-  <body>
-    <div class="container">
-      <h1>Python Geliştirici Quiz'i</h1>
-      <form action="{{ url_for('submit_answers') }}" method="POST">
-        {% for question in questions %}
-        <div class="card my-4">
-          <div class="card-body">
-            <h5 class="card-title">
-              Soru {{ loop.index }}: {{ question.text }}
-            </h5>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="question{{ loop.index }}"
-                value="A"
-                required
-              />
-              <label class="form-check-label"> {{ question.option_a }} </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="question{{ loop.index }}"
-                value="B"
-              />
-              <label class="form-check-label"> {{ question.option_b }} </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="question{{ loop.index }}"
-                value="C"
-              />
-              <label class="form-check-label"> {{ question.option_c }} </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="question{{ loop.index }}"
-                value="D"
-              />
-              <label class="form-check-label"> {{ question.option_d }} </label>
-            </div>
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Python Geliştirici Quiz'i</h1>
+    <form action="{{ url_for('submit_answers') }}" method="POST">
+      {% for question in questions %}
+      <div class="card my-4">
+        <div class="card-body">
+          <h5 class="card-title">
+            Soru {{ loop.index }}: {{ question.text }}
+          </h5>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="A" required />
+            <label class="form-check-label"> {{ question.option_a }} </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="B" />
+            <label class="form-check-label"> {{ question.option_b }} </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="C" />
+            <label class="form-check-label"> {{ question.option_c }} </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="D" />
+            <label class="form-check-label"> {{ question.option_d }} </label>
           </div>
         </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary btn-block">
-          Cevapları Gönder
-        </button>
-      </form>
-
-      <div class="footer">
-        <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
       </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary btn-block">
+        Cevapları Gönder
+      </button>
+    </form>
+
+    <div class="footer">
+      <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

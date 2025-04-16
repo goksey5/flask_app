@@ -1,19 +1,14 @@
 from flask import Flask
-from flask_quiz_app.config import Config
-from flask_quiz_app.extensions import db, migrate
-from flask_quiz_app.routes import main  # Blueprint
+from flask_sqlalchemy import SQLAlchemy
 
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object(Config)
+# Uygulama nesnesi
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Extensions
-    db.init_app(app)
-    migrate.init_app(app, db)
+db = SQLAlchemy(app)
 
-    # Blueprints
-    app.register_blueprint(main)
-
-    return app
+# Uygulama ile ilgili diğer ayarlar veya importlar buraya eklenebilir
+from app import routes  # routes.py dosyasını buraya import et
 
 

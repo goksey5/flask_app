@@ -1,7 +1,8 @@
 # models.py
-
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask_quiz_app.extensions import db, migrate
+from app import db
+db = SQLAlchemy()
 
 # Kullanıcı Modeli
 class User(db.Model):
