@@ -126,18 +126,19 @@
          <a href="{{ url_for('result') }}" class="btn">
           <button>Tüm Skor Tablosunu Gör</button>
           </a>
-          <label for="username">Kullanıcı Adınız:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Adınızı giriniz"
-            required
-          />
-          <button type="submit">Teste Başla</button>
-        </form>
+          <form method="POST">
+            <label for="username">Kullanıcı Adınız:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Adınızı giriniz"
+              required
+            />
+            <button type="submit">Teste Başla</button>
+          </form>
+        </div>
       </div>
-    </div>
 
     <footer>
       <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>

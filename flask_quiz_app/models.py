@@ -1,8 +1,5 @@
-# models.py
-from flask_sqlalchemy import SQLAlchemy
+from flask_quiz_app import db
 from datetime import datetime
-from app import db
-db = SQLAlchemy()
 
 # Kullanıcı Modeli
 class User(db.Model):
@@ -45,7 +42,5 @@ class Score(db.Model):
 
     user = db.relationship('User', back_populates='scores')
 
-
     def __repr__(self):
         return f'<Score {self.score}>'
-

@@ -1,13 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from flask_quiz_app import app,db
+from flask import render_template, request, redirect, url_for, session
+from flask_quiz_app import app, db
 from flask_quiz_app.models import User, Question, Score
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask('main', __name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
-db = SQLAlchemy(app)
-
-
 
 # Ana Sayfa: Kullanıcıdan isim al
 @app.route('/')
@@ -22,14 +15,14 @@ def quiz():
         username = request.form.get('username')
 
         # Kullanıcıyı veritabanında ara (varsa)
-        user = username.query.filter_by(name=username).first()
+        user = User.query.filter_by(username=username).first()
         if not user:
-            user = username(name=username)
+            user = User(username=username)
             db.session.add(user)
             db.session.commit()
 
         # Kullanıcıyı quiz sayfasına yönlendir
-        return redirect(url_for('start_quiz', username=user.name))  # Quiz sayfasına yönlendir
+        return redirect(url_for('start_quiz', username=user.username))  # Quiz sayfasına yönlendir
 
     return render_template('quiz_form.html')  # Kullanıcıdan adını alacak formu göster
 
@@ -37,12 +30,12 @@ def quiz():
 @app.route('/quiz/<username>', methods=['GET', 'POST'])
 def start_quiz(username):
     # Kullanıcıyı username ile veritabanında ara
-    user_score = Score.query.filter_by(username=username).first()  # username üzerinden sorgulama
+    user = User.query.filter_by(username=username).first()
     
     # Eğer kullanıcı veritabanında yoksa, yeni bir kullanıcı ekle
-    if not user_score:
-        user_score = Score(username=username, score=0)  # İlk skoru 0 olarak ekliyoruz
-        db.session.add(user_score)
+    if not user:
+        user = User(username=username)
+        db.session.add(user)
         db.session.commit()
 
     # Sorulara göre işlem yapılacaksa
@@ -55,32 +48,26 @@ def start_quiz(username):
                 score += 1
         
         # Eğer yeni skor eski skordan büyükse, skoru güncelle
-        if score > user_score.score:
-            user_score.score = score
-            db.session.commit()  # Skoru kaydediyoruz
+        user_score = Score(user_id=user.id, score=score)
+        db.session.add(user_score)
+        db.session.commit()
 
         # Sonuçları göster
-        return redirect(url_for('quiz_results', username=user_score.username))
+        return redirect(url_for('quiz_results', username=user.username))
 
     # Soruları al
     questions = Question.query.all()
-    return render_template('quiz.html', questions=questions, user=user_score)  # user_score gönderiyoruz
-
+    return render_template('quiz.html', questions=questions, user=user)  # user gönderiyoruz
 
 # Sonuç Sayfası
 @app.route('/quiz/results/<username>')
 def quiz_results(username):
     # Kullanıcıyı username ile veritabanından al
-    user_score = Score.query.filter_by(username=username).first()  
-    if user_score:
-        print(f"User Name: {user_score.username}, Highest Score: {user_score.score}")
-        return render_template('result.html', user=user_score)
+    user = User.query.filter_by(username=username).first()  
+    if user:
+        user_score = max(user.scores, key=lambda x: x.score, default=None)
+        return render_template('result.html', user=user, user_score=user_score)
     return redirect(url_for('quiz'))
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')  # Index sayfasını göster
 
 # Tüm Skorları Göster
 @app.route('/show_scores')
