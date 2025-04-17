@@ -30,9 +30,8 @@
             <h5 class="card-title">{{ username }}, Testin tamamlandı!</h5>
             <p class="card-text"><strong>Son Puanınız:</strong> {{ last_score }}</p>
             <p class="card-text"><strong>En İyi Puanınız:</strong> {{ user_best }}</p>
-            <p class="card-text"><strong>Tüm Zamanların En İyi Skoru:</strong> {{ all_time_best }}</p>
+            <p class="card-text"><strong>Tüm Zamanların En İyi Skoru:</strong> {{ best_score }} </p>
             
-            <a href="{{ url_for('show_scores') }}" class="btn btn-primary mt-3">Tüm Sonuçları Gör</a>
             <a href="/" class="btn btn-secondary mt-3">Tekrar Dene</a>
         </div>
         <div class="card-footer text-muted">
@@ -45,7 +44,6 @@
     Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>

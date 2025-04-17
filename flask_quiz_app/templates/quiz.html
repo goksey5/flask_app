@@ -76,37 +76,37 @@
 
 <body>
   <div class="container">
-    <h1>Python Geliştirici Quiz'i</h1>
-    <form action="{{ url_for('submit_answers') }}" method="POST">
-      {% for question in questions %}
-      <div class="card my-4">
-        <div class="card-body">
-          <h5 class="card-title">
-            Soru {{ loop.index }}: {{ question.text }}
-          </h5>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="A" required />
-            <label class="form-check-label"> {{ question.option_a }} </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="B" />
-            <label class="form-check-label"> {{ question.option_b }} </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="C" />
-            <label class="form-check-label"> {{ question.option_c }} </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="question{{ loop.index }}" value="D" />
-            <label class="form-check-label"> {{ question.option_d }} </label>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary btn-block">
-        Cevapları Gönder
-      </button>
-    </form>
+    <!-- En yüksek skoru gösteren bölüm -->
+    <div class="best-score">
+        Best Score: {{ best_score }}
+    </div>
+
+    <header>
+        <h1>Quiz</h1>
+    </header>
+
+    <div class="quiz-container">
+        <form class="quiz-form" method="POST">
+            {% for question in questions %}
+            <div class="question">
+                <p><strong>{{ loop.index }}. {{ question.question }}</strong></p>
+                <label><input type="radio" name="answer_{{ question.id }}" value="{{ question.option_a }}" required>
+                    {{
+                    question.option_a }}</label>
+                <label><input type="radio" name="answer_{{ question.id }}" value="{{ question.option_b }}" required>
+                    {{
+                    question.option_b }}</label>
+                <label><input type="radio" name="answer_{{ question.id }}" value="{{ question.option_c }}" required>
+                    {{
+                    question.option_c }}</label>
+                <label><input type="radio" name="answer_{{ question.id }}" value="{{ question.option_d }}" required>
+                    {{
+                    question.option_d }}</label> 
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
 
     <div class="footer">
       <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>

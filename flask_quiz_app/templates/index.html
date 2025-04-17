@@ -117,31 +117,14 @@
   </head>
 
   <body>
-    <header>
-      <h1>Web Geliştirme ve Programlama Sınavı</h1>
-    </header>
-
-    <div class="container">
-      <div class="content">
-         <a href="{{ url_for('result') }}" class="btn">
-          <button>Tüm Skor Tablosunu Gör</button>
-          </a>
-          <form method="POST">
-            <label for="username">Kullanıcı Adınız:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Adınızı giriniz"
-              required
-            />
-            <button type="submit">Teste Başla</button>
-          </form>
-        </div>
-      </div>
-
-    <footer>
+    <h1>Welcome to the Quiz App</h1>
+    <form method="POST" action="/quiz">
+        <label for="username">Enter your name:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Start Quiz</button>
+    </form>
+  <footer>
       <p>Gökhan ŞEN tarafından geliştirildi. Tüm hakları saklıdır. © 2025</p>
     </footer>
-  </body>
+</body>
 </html>
